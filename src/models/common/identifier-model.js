@@ -9,7 +9,7 @@ const tableIdentifier = {
         unique: true,
     },
     uuid: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING(255),
         primaryKey: true,
         defaultValue: function() {
             return uuidv7();
@@ -17,7 +17,7 @@ const tableIdentifier = {
         allowNull: false,
         unique: true,
     },
-    faskesUuid: {
+    faskes_uuid: {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: false,

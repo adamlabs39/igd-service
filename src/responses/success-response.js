@@ -1,25 +1,10 @@
-export default function successResponse(message, data, property) {
-  if (!data && !property) {
-    return {
-      status: "success",
-      message: message,
-    };
+const successResponse = (message,payload,properties) => {
+  let response = {
+    sucess: true,
+    message,
   }
-  
-  if (!property) {
-    return {
-      status: "success",
-      message: message,
-      payload: data,
-    };
-  }
-
-  if (property) {
-    return {
-      status: "success",
-      message: message,
-      properties: property,
-      payload: data,
-    };
-  }
+  if(payload)response.payload = payload;
+  if(properties)response.properties = properties;
+  return response;
 }
+export default successResponse;

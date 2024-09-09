@@ -4,7 +4,7 @@ import routes from "./routes/routes.js";
 import errorMiddleware from "./middlewares/error-middleware.js";
 import MODELMERGE from "./models/model-synchronize.js";
 import authorizationMiddleware from "./middlewares/authorization-middleware.js";
-import sequelizeInstance from "./configurations/sequelize-instance.js";
+import {dbSeeder} from "./seeders/db-seeder.js";
 
 const APPLICATION_PORT = process.env.APPLICATION_PORT;
 const APPLICATION_HOST = process.env.APPLICATION_HOST;
@@ -25,6 +25,8 @@ app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
         for (const model of MODELMERGE) {
             await model.sync({ alter: false, force: true });
         }
+
+        await dbSeeder();
     } catch (error) {
         console.error("Failed to synchronize the database:", error);
     }

@@ -13,13 +13,18 @@ export default class ReportRepository {
             const startOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).startOf('month').valueOf();
             const endOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).endOf('month').valueOf();
 
-            const filter = {
+            let filter = {
                 nama_tindakan: {[Op.like]: `%${args.name || ""}%`},
                 created_at: {
                     [Op.between]: [startOfMonth, endOfMonth]
                 },
+                pelayanan : {[Op.like]: `%${args.pelayanan || ""}%`},
                 faskes_uuid: args.faskes_uuid,
             };
+
+            if (args.lokasi_uuid !== undefined && args.lokasi_uuid !== "" && args.lokasi_uuid !== null) {
+                filter.lokasi_uuid = {[Op.like]: `%${args.lokasi_uuid || ""}%`}
+            }
 
             const option = {
                 where: {

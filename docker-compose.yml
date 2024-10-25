@@ -1,10 +1,10 @@
 version: '3.3'
 services:
-  app:
-    build: .
+  adameds-igd:
+    image: igd-service:dev
     container_name: adameds-igd
     ports:
-      - ${APPLICATION_PORT}:${APPLICATION_PORT}
+      - ${APPLICATION_PORT}:8084
     restart: always
     networks:
         - adameds-network
@@ -15,8 +15,6 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - APPLICATION_PORT=${APPLICATION_PORT}
-      - APPLICATION_HOST=${APPLICATION_HOST}
 networks:
     adameds-network:
         driver: bridge

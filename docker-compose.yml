@@ -7,7 +7,7 @@ services:
       - ${APPLICATION_PORT}:8084
     restart: always
     networks:
-      - adameds-network
+      - igd-network
     environment:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USERNAME=${DB_USERNAME}

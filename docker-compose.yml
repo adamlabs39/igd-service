@@ -15,7 +15,6 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-    restart: always
 networks:
   igd-network:
     driver: bridge

@@ -7,7 +7,7 @@ build-image:
   before_script:
     - docker compose --env-file /home/admin/adameds/.env-igd down --rmi all
   script:
-    - docker build -t igd-service:dev ./ --no-cache
+    - docker build -t adameds/igd-service:dev ./ --no-cache
   only:
     - main
 

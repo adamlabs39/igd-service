@@ -15,6 +15,13 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
+    volumes:
+      - type: bind
+        source: /home/admin/adameds/private.key
+        target: /adameds-igd/private.key
+      - type: bind
+        source: /home/admin/adameds/public.key
+        target: /adameds-igd/public.key
 networks:
   igd-network:
     driver: bridge

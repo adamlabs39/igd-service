@@ -1,9 +1,8 @@
 import sequelizeInstance from "../configurations/sequelize-instance.js";
-import HistoryTindakanModel from "../models/history-tindakan-model.js";
 import Pagination from "../helpers/pagination.js";
 import {Op} from "sequelize";
-import PetugasTindakanModel from "../models/petugas-tindakan-model.js";
 import moment from "moment";
+import {HistoryTindakanModel, PetugasTindakanModel} from "@adameds/model-sdk/rekam-medis";
 
 export default class ReportRepository {
     static async getTindakans(args) {
@@ -35,7 +34,7 @@ export default class ReportRepository {
                         model: PetugasTindakanModel,
                         as: "petugas_tindakan",
                         attributes: ["practitionerUuid"],
-                        required: true,
+                        required: false,
                         where: {
                             practitioner_uuid: {
                                 [Op.iLike]: `%${args.practitioner_uuid || ""}%`

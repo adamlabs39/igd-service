@@ -12,7 +12,7 @@ export default class Pagination{
             distinct:true,
             ...options
         });
-
+        
         const mappedRows = query.rows.map(row => Utils.camelToSnakeObject(row.toJSON()));
 
         return {

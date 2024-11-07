@@ -1,13 +1,13 @@
 version: '3.3'
 services:
-  app:
-    build: .
+  adameds-igd:
+    image: adameds/igd-service:dev
     container_name: adameds-igd
     ports:
-      - ${APPLICATION_PORT}:${APPLICATION_PORT}
+      - ${APPLICATION_PORT}:8084
     restart: always
     networks:
-        - adameds-network
+      - igd-network
     environment:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_USERNAME=${DB_USERNAME}
@@ -15,8 +15,13 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
-      - APPLICATION_PORT=${APPLICATION_PORT}
-      - APPLICATION_HOST=${APPLICATION_HOST}
+    volumes:
+      - type: bind
+        source: /home/admin/adameds/private.key
+        target: /adameds-igd/private.key
+      - type: bind
+        source: /home/admin/adameds/public.key
+        target: /adameds-igd/public.key
 networks:
-    adameds-network:
-        driver: bridge
+  igd-network:
+    driver: bridge

@@ -1,6 +1,9 @@
-version: '3.3'
 services:
   adameds-igd:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+      no_cache: true
     image: adameds/igd-service:dev
     container_name: adameds-igd
     ports:
@@ -22,6 +25,9 @@ services:
       - type: bind
         source: /home/admin/adameds/public.key
         target: /adameds-igd/public.key
+      - type: bind
+        source: /home/admin/adameds/.env.vault
+        target: /adameds-igd/.env.vault
 networks:
   igd-network:
     driver: bridge

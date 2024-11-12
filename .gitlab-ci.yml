@@ -1,22 +1,13 @@
 stages:
-  - build
-  - deploy
+  - build-deploy
 
-build-image:
-  stage: build
+build-deploy:
+  stage: build-deploy
   before_script:
     - docker compose --env-file /home/admin/adameds/.env-igd down --rmi all
     - echo "@adameds:registry=https://gitlab.com/api/v4/groups/93029767/-/packages/npm/" >> .npmrc
     - echo "//gitlab.com/api/v4/groups/93029767/-/packages/npm/:_authToken=$AUTH_TOKEN" >> .npmrc
-    - cat .npmrc
-  script:
-    - docker build -t adameds/igd-service:dev ./ --no-cache
-  only:
-    - dev-deployment
-
-deploy-app:
-  stage: deploy
-  only:
-    - dev-deployment
   script:
     - docker compose --env-file /home/admin/adameds/.env-igd up -d
+  only:
+    - dev-deployment

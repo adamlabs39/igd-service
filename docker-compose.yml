@@ -13,6 +13,8 @@ services:
       - igd-network
     environment:
       DOTENV_KEY: ${DOTENV_KEY}
+      API_BASE: ${API_BASE}
+      API_VERSION: ${API_VERSION}
     volumes:
       - type: bind
         source: /home/admin/adameds/private.key

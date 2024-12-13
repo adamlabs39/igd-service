@@ -9,8 +9,8 @@ export default class ReportRepository {
         return sequelizeInstance.transaction(async (tr) => {
             const currentYear = moment().year();
             const currentMonth = moment().month() + 1;
-            const startOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).startOf('month').valueOf();
-            const endOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).endOf('month').valueOf();
+            const startOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).startOf('month').unix();
+            const endOfMonth = moment().year(currentYear).month((args.month ?? currentMonth) - 1).endOf('month').unix();
 
             let filter = {
                 nama_tindakan: {[Op.like]: `%${args.name || ""}%`},

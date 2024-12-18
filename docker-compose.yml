@@ -7,7 +7,7 @@ services:
     image: adameds/igd-service:dev
     container_name: adameds-igd
     ports:
-      - ${APPLICATION_PORT}:8084
+      - 8084:8084
     restart: always
     networks:
       - igd-network
@@ -16,12 +16,6 @@ services:
       API_BASE: ${API_BASE}
       API_VERSION: ${API_VERSION}
     volumes:
-      - type: bind
-        source: /home/admin/adameds/private.key
-        target: /adameds-igd/private.key
-      - type: bind
-        source: /home/admin/adameds/public.key
-        target: /adameds-igd/public.key
       - type: bind
         source: /home/admin/adameds/.env.vault
         target: /adameds-igd/.env.vault

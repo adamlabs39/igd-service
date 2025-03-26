@@ -1,0 +1,24 @@
+services:
+  adameds-igd:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+      no_cache: true
+    image: adameds/igd-service:dev
+    container_name: adameds-igd
+    ports:
+      - 8084:8084
+    restart: always
+    networks:
+      - igd-network
+    environment:
+      DOTENV_KEY: ${DOTENV_KEY}
+      API_BASE: ${API_BASE}
+      API_VERSION: ${API_VERSION}
+    volumes:
+      - type: bind
+        source: /home/gitlab-runner/adameds/.env.vault
+        target: /adameds-igd/.env.vault
+networks:
+  igd-network:
+    driver: bridge

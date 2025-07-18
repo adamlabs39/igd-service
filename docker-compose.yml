@@ -1,24 +1,24 @@
 services:
   adameds-igd:
-    build: 
+    build:
       context: ./
       dockerfile: Dockerfile
       no_cache: true
     image: adameds/igd-service:dev
-    container_name: adameds-igd
+    container_name: api-adameds-igd
     ports:
       - 8084:8084
     restart: always
     networks:
       - igd-network
     environment:
-      DOTENV_KEY: ${DOTENV_KEY}
+      INFISICAL_TOKEN: ${INFISICAL_TOKEN}
       API_BASE: ${API_BASE}
       API_VERSION: ${API_VERSION}
-    volumes:
-      - type: bind
-        source: /home/engineer/adameds/.env.vault
-        target: /adameds-igd/.env.vault
+    # volumes:
+    #   - type: bind
+    #     source: /home/engineer/adameds/.env.vault
+    #     target: /adameds-igd/.env.vault
 networks:
   igd-network:
     driver: bridge

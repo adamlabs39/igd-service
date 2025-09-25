@@ -1,6 +1,9 @@
-export default function errorResponse(message) {
-  return {
-    status: "error",
-    message: message,
+const errorResponse = (message, errors) => {
+  let response = {
+    message,
   };
-}
+  if (errors) response.errors = errors;
+  return response;
+};
+
+export default errorResponse;

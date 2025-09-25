@@ -1,16 +1,17 @@
 import express from "express";
-import reportController from "../controllers/report-controller.js";
-
-const apiBase = process.env.API_BASE || "api";
-const apiVersion = process.env.API_VERSION || "v1";
-const baseUrl = `/${apiBase}/${apiVersion}/pelayanan`;
+import authorizationMiddleware from "../middlewares/authorization-middleware.js";
+import ReportController from "../controllers/report-controller.js";
 
 const routes = express.Router();
 
-// HEALTH CHECK
-routes.get(`${baseUrl}/health`, (req, res) => res.status(200).json({ message: "OK" }));
+routes.use(authorizationMiddleware);
 
-// REPORT
-routes.get(`${baseUrl}/laporan-tindakan`, reportController.getTindakans);
+// // // HEALTH CHECK
+// // routes.get(`/health`, (req, res) => res.status(200).json({ message: "OK" }));
+
+//* Report
+routes.get('/igd/report/kunjungan', ReportController.getAllKunjungan);
+routes.get('/igd/report/batal-kunjungan', ReportController.getCancelKunjungan);
+// routes.get('/laporan-tindakan', ReportController.getTindakans);
 
 export default routes;

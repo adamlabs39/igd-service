@@ -7,6 +7,10 @@ import authorizationSdk from "@adameds/authorization-sdk";
 
 const APPLICATION_PORT = process.env.APPLICATION_PORT;
 const APPLICATION_HOST = process.env.APPLICATION_HOST;
+const API_BASE = process.env.API_BASE || "api";
+const API_VERSION = process.env.API_VERSION || "v3";
+const API_MODULE = process.env.API_MODULE || "pelayanan";
+const BASE_URL = `/${API_BASE}/${API_VERSION}/${API_MODULE}`;
 
 const app = express();
 app.use(cors({
@@ -16,10 +20,8 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(authorizationSdk([]));
-app.use(routes);
+app.use(BASE_URL, routes);
 app.use(errorMiddleware);
 app.listen(APPLICATION_PORT, APPLICATION_HOST, async () => {
-
     console.log(`Server running on http://${APPLICATION_HOST}:${APPLICATION_PORT}`);
 });
